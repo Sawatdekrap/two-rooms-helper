@@ -30,13 +30,25 @@ const ShelfContainer = styled.div<{ expanded: boolean }>`
   }
 `;
 
+const ShelfFallback = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-style: italic;
+`;
+
 interface ShelfProps {
   title: string;
   children?: React.ReactNode;
+  fallbackText?: string;
 }
 
-const Shelf = ({ title, children }: ShelfProps) => {
+const Shelf = ({ title, children, fallbackText }: ShelfProps) => {
   const [expanded, setExpanded] = useState(true);
+
+  const hasChildren = React.Children.count(children);
 
   return (
     <ShelfContainer expanded={expanded}>
@@ -47,7 +59,15 @@ const Shelf = ({ title, children }: ShelfProps) => {
       >
         {title}
       </ShelfTitle>
-      {expanded && <ShelfContent>{children}</ShelfContent>}
+      {expanded && (
+        <ShelfContent>
+          {hasChildren ? (
+            children
+          ) : (
+            <ShelfFallback>{fallbackText}</ShelfFallback>
+          )}
+        </ShelfContent>
+      )}
     </ShelfContainer>
   );
 };

@@ -112,7 +112,10 @@ const DraftPage = () => {
         </DraftPageContent>
       </ContentContainer>
       <ShelfContainer>
-        <Shelf title={`Selected Cards (${numSelectedCards})`}>
+        <Shelf
+          title={`Selected Cards (${numSelectedCards})`}
+          fallbackText="No cards selected"
+        >
           {selectedCards.map((card) => {
             const updateCount = (newCount: number) =>
               updateCardCount(card.card.color, card.card.type, newCount);
