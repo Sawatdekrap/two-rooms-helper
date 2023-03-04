@@ -90,9 +90,15 @@ interface DraftCardProps {
   card: CardItf;
   count: number;
   updateCardCount: (count: number) => void;
+  onClickInfo: () => void;
 }
 
-const DraftCard = ({ card, updateCardCount, count }: DraftCardProps) => {
+const DraftCard = ({
+  card,
+  updateCardCount,
+  count,
+  onClickInfo,
+}: DraftCardProps) => {
   const imageUrl = `cards/${card.color}-${card.type}.jpg`;
   const isSelected = count > 0;
 
@@ -116,7 +122,7 @@ const DraftCard = ({ card, updateCardCount, count }: DraftCardProps) => {
           </CountOverlay>
         )}
       </CardContainer>
-      <InfoButton>?</InfoButton>
+      <InfoButton onClick={onClickInfo}>?</InfoButton>
     </DraftCardWrapper>
   );
 };

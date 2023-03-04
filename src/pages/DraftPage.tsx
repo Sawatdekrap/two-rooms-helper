@@ -6,6 +6,7 @@ import SelectedCardItf from "../interfaces/selectedCard";
 import Shelf from "../components/Shelf";
 import ShelfCard from "../components/ShelfCard";
 import { CardColor, CardType } from "../types/card";
+import Modal from "../components/Modal";
 
 const PageContainer = styled.div`
   display: flex;
@@ -22,7 +23,6 @@ const ContentContainer = styled.div`
 
 const ShelfContainer = styled.div`
   flex: 0;
-  z-index: 1;
 `;
 
 const DraftPageContent = styled.div`
@@ -52,6 +52,7 @@ const DraftPage = () => {
     })
   );
   const [searchText, setSearchtext] = useState("");
+  const [isModalActive, setIsModalActive] = useState(false);
 
   const filteredCards = useMemo(() => {
     return cards.filter((card) =>
@@ -99,12 +100,14 @@ const DraftPage = () => {
               const mappedUpdateCardCount = (count: number) => {
                 updateCardCount(card.card.color, card.card.type, count);
               };
+              const onClickInfo = () => setIsModalActive(true);
               return (
                 <DraftCard
                   key={`${card.card.color}-${card.card.type}`}
                   card={card.card}
                   count={card.count}
                   updateCardCount={mappedUpdateCardCount}
+                  onClickInfo={onClickInfo}
                 />
               );
             })}
@@ -130,6 +133,9 @@ const DraftPage = () => {
           })}
         </Shelf>
       </ShelfContainer>
+      <Modal active={isModalActive} closeModal={() => setIsModalActive(false)}>
+        HERE IS SOME CONTENT
+      </Modal>
     </PageContainer>
   );
 };
