@@ -5,10 +5,16 @@ import CardItf from "../interfaces/card";
 const WIDTH = "160px";
 const HEIGHT = "240px";
 
+const DraftCardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4px 8px;
+`;
+
 const CardContainer = styled.div`
   width: ${WIDTH};
   height: ${HEIGHT};
-  margin: 8px;
   background-color: black;
   border-radius: 8px;
   overflow: hidden;
@@ -59,6 +65,27 @@ const OverlayAction = styled.div`
   }
 `;
 
+const InfoButton = styled.div`
+  width: 40px;
+  height: 16px;
+  top: -4px;
+  border: 4px solid #aaa;
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  color: #aaa;
+  background-color: #eee;
+
+  :hover {
+    border-color: #888;
+    color: #888;
+    background-color: #ccc;
+    cursor: pointer;
+  }
+`;
+
 interface DraftCardProps {
   card: CardItf;
   count: number;
@@ -74,20 +101,23 @@ const DraftCard = ({ card, updateCardCount, count }: DraftCardProps) => {
   };
 
   return (
-    <CardContainer onClick={selectNew}>
-      <CardImage src={imageUrl} isSelected={isSelected} draggable="false" />
-      {isSelected && (
-        <CountOverlay>
-          <OverlayAction onClick={() => updateCardCount(count - 1)}>
-            -
-          </OverlayAction>
-          <OverlayItem>{count}</OverlayItem>
-          <OverlayAction onClick={() => updateCardCount(count + 1)}>
-            +
-          </OverlayAction>
-        </CountOverlay>
-      )}
-    </CardContainer>
+    <DraftCardWrapper>
+      <CardContainer onClick={selectNew}>
+        <CardImage src={imageUrl} isSelected={isSelected} draggable="false" />
+        {isSelected && (
+          <CountOverlay>
+            <OverlayAction onClick={() => updateCardCount(count - 1)}>
+              -
+            </OverlayAction>
+            <OverlayItem>{count}</OverlayItem>
+            <OverlayAction onClick={() => updateCardCount(count + 1)}>
+              +
+            </OverlayAction>
+          </CountOverlay>
+        )}
+      </CardContainer>
+      <InfoButton>?</InfoButton>
+    </DraftCardWrapper>
   );
 };
 
