@@ -1,4 +1,7 @@
+.DS_Store
+
 /node_modules
 
+# Don't save all jpgs or pdfs
 *.jpg
 *.pdf
