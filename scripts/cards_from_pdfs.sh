@@ -52,4 +52,12 @@ do
     CURR_CARD=`expr $CURR_CARD + 1`
 done
 
+# Grab team icons
+convert "$OUTPUT_DIR/BLUE-AGENT.jpg" -crop "48x48+259+437" "$OUTPUT_DIR/BLUE-ICON.jpg"
+convert "$OUTPUT_DIR/RED-AGENT.jpg" -crop "56x56+255+433" "$OUTPUT_DIR/RED-ICON.jpg"
+convert "$OUTPUT_DIR/OTHER-DRUNK.jpg" -crop "56x56+255+429" "$OUTPUT_DIR/OTHER-ICON.jpg"
+convert "$OUTPUT_DIR/GREEN-LEPRECHAUN.jpg" -crop "56x56+256+431" "$OUTPUT_DIR/GREEN-L-ICON.jpg"
+convert "$OUTPUT_DIR/GREEN-ZOMBIE.jpg" -crop "56x56+256+431" "$OUTPUT_DIR/GREEN-Z-ICON.jpg"
+convert "$OUTPUT_DIR/GREY-AGORAPHOBE.jpg" -crop "56x56+258+429" "$OUTPUT_DIR/GREY-ICON.jpg"
+
 echo

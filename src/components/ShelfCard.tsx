@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import CardItf from "../interfaces/card";
-import { lightDarkForCardColor } from "../utils";
+import { getCardInfo, lightDarkForCardColor } from "../utils";
+import { getIconImageUrl } from "../utils";
 
 const CardContainer = styled.div<{ backgroundColor: string }>`
   display: flex;
@@ -13,37 +14,15 @@ const CardContainer = styled.div<{ backgroundColor: string }>`
   font-weight: bold;
 `;
 
-const CardCount = styled.div<{ color: string; backgroundColor: string }>`
-  flex: 0 0 16px;
-  padding: 4px;
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.color};
+const CardIcon = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 const CardDescription = styled.div<{ color: string }>`
   flex: auto;
   padding: 4px;
   color: ${(props) => props.color};
-`;
-
-const CardActions = styled.div<{ color: string; backgroundColor: string }>`
-  flex: 0;
-  display: flex;
-  background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.color};
-`;
-
-const ActionButton = styled.button`
-  flex: 0;
-  border: none;
-  background-color: inherit;
-  width: 16px;
-  height: 16px;
-
-  :hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
 `;
 
 interface ShelfCardProps {
@@ -53,11 +32,15 @@ interface ShelfCardProps {
 }
 
 const ShelfCard = ({ card, updateCount, count }: ShelfCardProps) => {
-  const description = `(${count}) ${card.type}`;
+  const cardInfo = getCardInfo(card);
+  const countSuffix = count > 1 ? ` (${count})` : "";
+  const description = `${cardInfo.name.toUpperCase()}${countSuffix}`;
   const [primaryColor, secondaryColor] = lightDarkForCardColor(card.color);
+  const iconUrl = getIconImageUrl(card);
 
   return (
     <CardContainer backgroundColor={secondaryColor}>
+      <CardIcon src={iconUrl} />
       <CardDescription color={"white"}>{description}</CardDescription>
     </CardContainer>
   );
