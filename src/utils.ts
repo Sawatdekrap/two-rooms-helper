@@ -1,7 +1,8 @@
-import { CardColor, CardType } from "./types/card";
+import { CardColor, CardId, CardType } from "./types/card";
 import * as styles from "./styles";
 import CardItf from "./interfaces/card";
 import CARD_INFO, { CardInfoItf } from "./constants/cardInfo";
+import ALL_CARDS from "./constants/cards";
 
 export const lightDarkForCardColor = (
   cardColor: CardColor
@@ -24,6 +25,12 @@ export const lightDarkForCardColor = (
 
 export const getCardImageUrl = (card: CardItf): string => {
   return `cards/${card.color}-${card.type}.jpg`;
+};
+
+export const getCardImageUrlFromId = (cardId: CardId): string => {
+  return getCardImageUrl(
+    ALL_CARDS.find((card) => card.id === cardId) as CardItf
+  );
 };
 
 export const getIconImageUrl = (card: CardItf): string => {

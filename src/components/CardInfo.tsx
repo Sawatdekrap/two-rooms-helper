@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import CardItf from "../interfaces/card";
-import { getCardImageUrl, getCardInfo, lightDarkForCardColor } from "../utils";
+import {
+  getCardImageUrl,
+  getCardInfo,
+  lightDarkForCardColor,
+  getCardImageUrlFromId,
+} from "../utils";
 import { COLOR_PRO, COLOR_CON } from "../styles";
 
 const CardInfoWrapper = styled.div`
@@ -33,14 +38,11 @@ const CardInfoDescription = styled.div`
   font-style: italic;
 `;
 
-const Header = styled.div`
-  flex: 0;
-`;
-
 const DetailsWrapper = styled.div`
   flex: auto;
   background-color: white;
   color: black;
+  padding: 0 8px;
 `;
 
 const CardInfoExplaination = styled.div`
@@ -67,6 +69,18 @@ const PointMarker = styled.div<{ backgroundColor: string }>`
 
 const PointText = styled.div`
   flex: auto;
+`;
+
+const RelatedCardWrapper = styled.div`
+  display: flex;
+  margin: 0 16px;
+`;
+
+const RelatedCard = styled.img`
+  width: 100px;
+  height: 150px;
+  margin: 4px;
+  border-radius: 4px;
 `;
 
 interface CardInfoProps {
@@ -99,6 +113,24 @@ const CardInfo = ({ card }: CardInfoProps) => {
             <PointMarker backgroundColor={COLOR_CON}>-</PointMarker>
             <PointText>{con}</PointText>
           </Point>
+          {cardInfo.related && (
+            <>
+              {" "}
+              <h3>Related Cards</h3>
+              <RelatedCardWrapper>
+                {cardInfo.related.map((relatedCardId) => {
+                  const relatedCardImgUrl =
+                    getCardImageUrlFromId(relatedCardId);
+                  return (
+                    <RelatedCard
+                      key={relatedCardId.toString()}
+                      src={relatedCardImgUrl}
+                    />
+                  );
+                })}
+              </RelatedCardWrapper>
+            </>
+          )}
         </DetailsWrapper>
       </CardInfoContainer>
     </CardInfoWrapper>
