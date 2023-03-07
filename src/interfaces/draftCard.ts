@@ -1,6 +1,6 @@
 import CardItf from "./card";
 
-export default interface SelectedCardItf {
+export default interface DraftCardItf {
   card: CardItf;
   count: number;
 }

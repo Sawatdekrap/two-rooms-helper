@@ -56,12 +56,19 @@ const OverlayItem = styled.div`
   font-size: 64px;
 `;
 
-const OverlayAction = styled.div`
+const OverlayAction = styled.button`
   font-size: 52px;
+  background: none;
+  border: none;
+  color: inherit;
 
   :hover {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.9);
+  }
+
+  :disabled {
+    opacity: 0;
   }
 `;
 
@@ -101,6 +108,8 @@ const DraftCard = ({
 }: DraftCardProps) => {
   const imageUrl = `cards/${card.color}-${card.type}.jpg`;
   const isSelected = count > 0;
+  const min = card.min || 0;
+  const max = card.max || 99;
 
   const selectNew = () => {
     !isSelected && updateCardCount(1);
@@ -112,11 +121,17 @@ const DraftCard = ({
         <CardImage src={imageUrl} isSelected={isSelected} draggable="false" />
         {isSelected && (
           <CountOverlay>
-            <OverlayAction onClick={() => updateCardCount(count - 1)}>
+            <OverlayAction
+              onClick={() => updateCardCount(count - 1)}
+              disabled={count === min}
+            >
               -
             </OverlayAction>
             <OverlayItem>{count}</OverlayItem>
-            <OverlayAction onClick={() => updateCardCount(count + 1)}>
+            <OverlayAction
+              onClick={() => updateCardCount(count + 1)}
+              disabled={count === max}
+            >
               +
             </OverlayAction>
           </CountOverlay>

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import ALL_CARDS from "../constants/cards";
 import DraftCard from "../components/DraftCard";
 import styled from "styled-components";
-import SelectedCardItf from "../interfaces/selectedCard";
+import DraftCardItf from "../interfaces/draftCard";
 import Shelf from "../components/Shelf";
 import ShelfCard from "../components/ShelfCard";
 import { CardColor, CardType } from "../types/card";
@@ -48,41 +48,46 @@ const DraftPageHeader = styled.div`
 `;
 
 const DraftPage = () => {
-  const [cards, setCards] = useState<SelectedCardItf[]>(
+  const [draftCards, setDraftCards] = useState<DraftCardItf[]>(
     ALL_CARDS.map((card) => {
-      return { card, count: 0 };
+      const initialCount = [CardType.PRESIDENT, CardType.BOMBER].includes(
+        card.type
+      )
+        ? 1
+        : 0;
+      return { card, count: initialCount };
     })
   );
   const [searchText, setSearchtext] = useState("");
   const [modalCard, setModalCard] = useState<CardItf | undefined>();
 
   const filteredCards = useMemo(() => {
-    return cards.filter((card) =>
+    return draftCards.filter((card) =>
       card.card.type.toLowerCase().includes(searchText.toLowerCase())
     );
-  }, [searchText, cards]);
+  }, [searchText, draftCards]);
 
   const selectedCards = useMemo(() => {
-    return cards.filter((card) => card.count > 0);
-  }, [cards]);
+    return draftCards.filter((card) => card.count > 0);
+  }, [draftCards]);
 
   const numSelectedCards = useMemo(() => {
-    return cards.reduce((total, card) => (total += card.count), 0);
-  }, [cards]);
+    return draftCards.reduce((total, card) => (total += card.count), 0);
+  }, [draftCards]);
 
   const updateCardCount = (
     color: CardColor,
     type: CardType,
     newCount: number
   ) => {
-    const cardIdx = cards.findIndex(
+    const cardIdx = draftCards.findIndex(
       (card) => card.card.color === color && card.card.type === type
     );
     if (cardIdx === -1) return;
-    const card = cards[cardIdx];
+    const card = draftCards[cardIdx];
     card.count = newCount;
-    cards.splice(cardIdx, 1, { ...card });
-    setCards([...cards]);
+    draftCards.splice(cardIdx, 1, { ...card });
+    setDraftCards([...draftCards]);
   };
 
   return (

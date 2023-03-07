@@ -61,6 +61,8 @@ const ALL_CARDS: CardItf[] = [
   {
     color: CardColor.RED,
     type: CardType.BOMBER,
+    min: 1,
+    max: 1,
   },
   {
     color: CardColor.BLUE,
@@ -285,6 +287,8 @@ const ALL_CARDS: CardItf[] = [
   {
     color: CardColor.BLUE,
     type: CardType.PRESIDENT,
+    min: 1,
+    max: 1,
   },
   {
     color: CardColor.BLUE,
