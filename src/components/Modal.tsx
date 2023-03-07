@@ -8,7 +8,7 @@ const ModalBackdrop = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
 
   :hover {
     cursor: pointer;
@@ -18,7 +18,13 @@ const ModalBackdrop = styled.div`
 const ModalContent = styled.div`
   max-width: 90vw;
   max-height: 100vh;
+  margin: 50px auto;
   overflow: scroll;
+  border-radius: 8px;
+
+  :hover {
+    cursor: default;
+  }
 `;
 
 interface ModalProps {
@@ -34,7 +40,9 @@ const Modal = ({ active, closeModal, children }: ModalProps) => {
 
   return createPortal(
     <ModalBackdrop onClick={closeModal}>
-      <ModalContent>{children}</ModalContent>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        {children}
+      </ModalContent>
     </ModalBackdrop>,
     modalRoot as HTMLElement
   );

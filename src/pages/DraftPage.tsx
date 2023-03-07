@@ -7,6 +7,8 @@ import Shelf from "../components/Shelf";
 import ShelfCard from "../components/ShelfCard";
 import { CardColor, CardType } from "../types/card";
 import Modal from "../components/Modal";
+import CardInfoComponent from "../components/CardInfo";
+import CardItf from "../interfaces/card";
 
 const PageContainer = styled.div`
   display: flex;
@@ -52,7 +54,7 @@ const DraftPage = () => {
     })
   );
   const [searchText, setSearchtext] = useState("");
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [modalCard, setModalCard] = useState<CardItf | undefined>();
 
   const filteredCards = useMemo(() => {
     return cards.filter((card) =>
@@ -100,7 +102,9 @@ const DraftPage = () => {
               const mappedUpdateCardCount = (count: number) => {
                 updateCardCount(card.card.color, card.card.type, count);
               };
-              const onClickInfo = () => setIsModalActive(true);
+              const onClickInfo = () => {
+                setModalCard(card.card);
+              };
               return (
                 <DraftCard
                   key={`${card.card.color}-${card.card.type}`}
@@ -133,8 +137,8 @@ const DraftPage = () => {
           })}
         </Shelf>
       </ShelfContainer>
-      <Modal active={isModalActive} closeModal={() => setIsModalActive(false)}>
-        HERE IS SOME CONTENT
+      <Modal active={!!modalCard} closeModal={() => setModalCard(undefined)}>
+        <CardInfoComponent card={modalCard as CardItf} />
       </Modal>
     </PageContainer>
   );

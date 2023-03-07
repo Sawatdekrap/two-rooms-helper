@@ -8,3 +8,7 @@ export const GREY_LIGHT = "#949492";
 export const GREY_DARK = "#646665";
 export const GREEN_LIGHT = "#82BD57";
 export const GREEN_DARK = "#315630";
+
+// Other colors
+export const COLOR_PRO = "#9BB5D2";
+export const COLOR_CON = "#D87472";

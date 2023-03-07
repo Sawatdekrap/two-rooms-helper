@@ -1,5 +1,7 @@
-import { CardColor } from "./types/card";
+import { CardColor, CardType } from "./types/card";
 import * as styles from "./styles";
+import CardItf from "./interfaces/card";
+import CARD_INFO, { CardInfoItf } from "./constants/cardInfo";
 
 export const lightDarkForCardColor = (
   cardColor: CardColor
@@ -18,4 +20,27 @@ export const lightDarkForCardColor = (
     default:
       throw `No handling for color '${cardColor}'`;
   }
+};
+
+export const getCardImageUrl = (card: CardItf): string => {
+  return `cards/${card.color}-${card.type}.jpg`;
+};
+
+export const getIconImageUrl = (card: CardItf): string => {
+  let prefix = `${card.color}`;
+  if (card.type === CardType.LEPRECHAUN) {
+    prefix = `${card.color}-L`;
+  } else if (card.type === CardType.ZOMBIE) {
+    prefix = `${card.color}-Z`;
+  } else if (card.type === CardType.BLUESPY) {
+    prefix = `${CardColor.BLUE}`;
+  } else if (card.type === CardType.REDSPY) {
+    prefix = `${CardColor.RED}`;
+  }
+
+  return `icons/${prefix}-ICON.jpg`;
+};
+
+export const getCardInfo = (card: CardItf): CardInfoItf => {
+  return CARD_INFO[card.type];
 };

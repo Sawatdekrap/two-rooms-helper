@@ -1,7 +1,7 @@
 import React from "react";
 import { CardType } from "../types/card";
 
-interface CardInfo {
+export interface CardInfoItf {
   name: string;
   description: string;
   explaination?: React.ReactNode;
@@ -9,7 +9,7 @@ interface CardInfo {
   con?: React.ReactNode;
 }
 
-const CARD_INFO: { [key in CardType]: CardInfo } = {
+const CARD_INFO: { [key in CardType]: CardInfoItf } = {
   [CardType.BASIC]: {
     name: "Regular Player",
     description: "Test description",
@@ -17,6 +17,32 @@ const CARD_INFO: { [key in CardType]: CardInfo } = {
   [CardType.AGENT]: {
     name: "Agent",
     description: "Force a card share once per round",
+    explaination: (
+      <>
+        <p>
+          You have the <strong>AGENT</strong> power: once per round, you may
+          privately reveal your card to a player and force that player to card
+          share with you. You must verbally say to the target player, “I’m using
+          my AGENT power. You <strong>must</strong> card share with me.”
+        </p>
+        <p>
+          <i>
+            Note: The AGENT power works even on characters that normally can’t
+            card share (e.g. Shy Guy and Coy Boy).
+          </i>
+        </p>
+      </>
+    ),
+    pro: (
+      <span>
+        Characters that have card share power or restrictions recommended.
+      </span>
+    ),
+    con: (
+      <span>
+        10 players or fewer not recommended. Contains character exceptions.
+      </span>
+    ),
   },
   [CardType.AGORAPHOBE]: {
     name: "Agoraphobe",
