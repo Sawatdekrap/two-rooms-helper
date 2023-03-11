@@ -7,7 +7,7 @@ import {
   lightDarkForCardColor,
   getCardImageUrlFromId,
 } from "../utils";
-import { COLOR_PRO, COLOR_CON } from "../styles";
+import { COLOR_PRO, COLOR_CON, COLOR_FG_DARK, FONT_TITLE } from "../styles";
 
 const CardInfoWrapper = styled.div`
   display: flex;
@@ -31,6 +31,7 @@ const CardInfoContainer = styled.div`
 const CardInfoName = styled.div`
   font-size: 64px;
   font-weight: bold;
+  font-family: ${FONT_TITLE};
 `;
 
 const CardInfoDescription = styled.div`
@@ -41,7 +42,7 @@ const CardInfoDescription = styled.div`
 const DetailsWrapper = styled.div`
   flex: auto;
   background-color: white;
-  color: black;
+  color: ${COLOR_FG_DARK};
   padding: 0 8px;
 `;
 
@@ -101,7 +102,7 @@ const CardInfo = ({ card }: CardInfoProps) => {
     <CardInfoWrapper style={{ backgroundColor: secondaryColor }}>
       <CardImage src={cardImageUrl} />
       <CardInfoContainer>
-        <CardInfoName>{cardInfo.name}</CardInfoName>
+        <CardInfoName>{cardInfo.name.toUpperCase()}</CardInfoName>
         <CardInfoDescription>{cardInfo.description}</CardInfoDescription>
         <DetailsWrapper>
           <CardInfoExplaination>{explaination}</CardInfoExplaination>

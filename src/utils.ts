@@ -17,7 +17,7 @@ export const lightDarkForCardColor = (
     case CardColor.GREEN:
       return [styles.GREEN_LIGHT, styles.GREEN_DARK];
     case CardColor.OTHER:
-      return [styles.GREY_LIGHT, styles.GREY_DARK];
+      return [styles.PURPLE_LIGHT, styles.PURPLE_DARK];
     default:
       throw `No handling for color '${cardColor}'`;
   }

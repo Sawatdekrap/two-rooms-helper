@@ -12,7 +12,7 @@ const ShelfTitle = styled.div`
 
 const ShelfContent = styled.div`
   flex: auto;
-  width: 220px;
+  width: 240px;
 
   overflow-y: scroll;
 `;

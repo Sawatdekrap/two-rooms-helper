@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import CardItf from "../interfaces/card";
-import { getCardInfo, lightDarkForCardColor } from "../utils";
-import { getIconImageUrl } from "../utils";
+import { getCardInfo, lightDarkForCardColor, getIconImageUrl } from "../utils";
+import { FONT_TITLE } from "../styles";
 
 const CardContainer = styled.div<{ backgroundColor: string }>`
   display: flex;
+  align-items: center;
   width: 100%;
   overflow-x: hidden;
   color: white;
@@ -15,14 +16,18 @@ const CardContainer = styled.div<{ backgroundColor: string }>`
 `;
 
 const CardIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  margin-top: 1px;
+  object-fit: contain;
 `;
 
 const CardDescription = styled.div<{ color: string }>`
   flex: auto;
-  padding: 4px;
+  padding: 4px 0;
   color: ${(props) => props.color};
+  font-family: ${FONT_TITLE};
 `;
 
 interface ShelfCardProps {

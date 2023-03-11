@@ -8,7 +8,16 @@ export const GREY_LIGHT = "#949492";
 export const GREY_DARK = "#646665";
 export const GREEN_LIGHT = "#82BD57";
 export const GREEN_DARK = "#315630";
+export const PURPLE_LIGHT = "#6A5690";
+export const PURPLE_DARK = "#372D6C";
 
-// Other colors
+// Element colors
 export const COLOR_PRO = "#9BB5D2";
 export const COLOR_CON = "#D87472";
+
+// Page Colors
+export const COLOR_BG_DARK = "rgba(56,56,56,0)";
+export const COLOR_FG_DARK = "#212326";
+
+// Fonts
+export const FONT_TITLE = '"archivoblack", Georgia, serif';

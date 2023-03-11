@@ -9,6 +9,7 @@ import { CardColor, CardType } from "../types/card";
 import Modal from "../components/Modal";
 import CardInfoComponent from "../components/CardInfo";
 import CardItf from "../interfaces/card";
+import { COLOR_BG_DARK } from "../styles";
 
 const PageContainer = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 100vh;
+  background-color: ${COLOR_BG_DARK};
 `;
 
 const ShelfContainer = styled.div`
