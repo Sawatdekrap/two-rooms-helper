@@ -7,7 +7,7 @@ import {
   lightDarkForCardColor,
   getCardImageUrlFromId,
 } from "../utils";
-import { COLOR_PRO, COLOR_CON, COLOR_FG_DARK, FONT_TITLE } from "../styles";
+import { COLOR_PRO, COLOR_CON, COLOR_DARK, FONT_TITLE } from "../styles";
 
 const CardInfoWrapper = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ const CardInfoDescription = styled.div`
 const DetailsWrapper = styled.div`
   flex: auto;
   background-color: white;
-  color: ${COLOR_FG_DARK};
+  color: ${COLOR_DARK};
   padding: 0 8px;
 `;
 

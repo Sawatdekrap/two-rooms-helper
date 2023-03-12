@@ -16,8 +16,7 @@ export const COLOR_PRO = "#9BB5D2";
 export const COLOR_CON = "#D87472";
 
 // Page Colors
-export const COLOR_BG_DARK = "rgba(56,56,56,0)";
-export const COLOR_FG_DARK = "#212326";
+export const COLOR_DARK = "#212326";
 
 // Fonts
 export const FONT_TITLE = '"archivoblack", Georgia, serif';
