@@ -9,28 +9,30 @@ import { CardColor, CardType } from "../types/card";
 import Modal from "../components/Modal";
 import CardInfoComponent from "../components/CardInfo";
 import CardItf from "../interfaces/card";
-import { COLOR_DARK } from "../styles";
+import { PageWrapper, Header, Body, Footer } from "../components/PageElements";
+import { FONT_TITLE } from "../styles";
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  max-height: 100vh;
+const Title = styled.h1`
+  font-size: 48px;
+  font-family: ${FONT_TITLE};
+  color: white;
+  text-align: center;
 `;
 
-const ContentContainer = styled.div`
+const DraftWrapper = styled.div`
+  display: flex;
+`;
+
+const DraftHeader = styled.div`
+  flex: 0;
+  padding: 32px 0;
+  text-align: center;
+`;
+
+const DraftContentWrapper = styled.div`
   flex: auto;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
-  background-color: ${COLOR_DARK};
-`;
-
-const ShelfContainer = styled.div`
-  flex: 0;
-`;
-
-const DraftPageContent = styled.div`
-  flex: auto;
   overflow-y: scroll;
 `;
 
@@ -38,15 +40,14 @@ const DraftCardsContainer = styled.div`
   flex: 1;
   display: flex;
   flex-flow: row wrap;
-  overflow-y: scroll;
   justify-content: center;
 `;
 
-const DraftPageHeader = styled.div`
-  flex: 0;
+const ShelfContainer = styled.div`
+  position: sticky;
   top: 0;
-  padding: 8px;
-  background-color: white;
+  flex: 0;
+  max-height: 100vh;
 `;
 
 const DraftPage = () => {
@@ -93,61 +94,66 @@ const DraftPage = () => {
   };
 
   return (
-    <PageContainer>
-      <ContentContainer>
-        <DraftPageHeader>
-          <h1>Draft Page</h1>
-          <input
-            value={searchText}
-            onChange={(e) => setSearchtext(e.target.value)}
-          />
-        </DraftPageHeader>
-
-        <DraftPageContent>
-          <DraftCardsContainer>
-            {filteredCards.map((card) => {
-              const mappedUpdateCardCount = (count: number) => {
-                updateCardCount(card.card.color, card.card.type, count);
-              };
-              const onClickInfo = () => {
-                setModalCard(card.card);
-              };
-              return (
-                <DraftCard
-                  key={`${card.card.color}-${card.card.type}`}
-                  card={card.card}
-                  count={card.count}
-                  updateCardCount={mappedUpdateCardCount}
-                  onClickInfo={onClickInfo}
-                />
-              );
-            })}
-          </DraftCardsContainer>
-        </DraftPageContent>
-      </ContentContainer>
-      <ShelfContainer>
-        <Shelf
-          title={`Selected Cards (${numSelectedCards})`}
-          fallbackText="No cards selected"
-        >
-          {selectedCards.map((card) => {
-            const updateCount = (newCount: number) =>
-              updateCardCount(card.card.color, card.card.type, newCount);
-            return (
-              <ShelfCard
-                key={`${card.card.color}-${card.card.type}`}
-                card={card.card}
-                updateCount={updateCount}
-                count={card.count}
+    <PageWrapper>
+      <Header>
+        <Title>Draft Page</Title>
+      </Header>
+      <Body>
+        <DraftWrapper>
+          <DraftContentWrapper>
+            <DraftHeader>
+              <input
+                value={searchText}
+                onChange={(e) => setSearchtext(e.target.value)}
               />
-            );
-          })}
-        </Shelf>
-      </ShelfContainer>
-      <Modal active={!!modalCard} closeModal={() => setModalCard(undefined)}>
-        <CardInfoComponent card={modalCard as CardItf} />
-      </Modal>
-    </PageContainer>
+            </DraftHeader>
+            <DraftCardsContainer>
+              {filteredCards.map((card) => {
+                const mappedUpdateCardCount = (count: number) => {
+                  updateCardCount(card.card.color, card.card.type, count);
+                };
+                const onClickInfo = () => {
+                  setModalCard(card.card);
+                };
+                return (
+                  <DraftCard
+                    key={`${card.card.color}-${card.card.type}`}
+                    card={card.card}
+                    count={card.count}
+                    updateCardCount={mappedUpdateCardCount}
+                    onClickInfo={onClickInfo}
+                  />
+                );
+              })}
+            </DraftCardsContainer>
+          </DraftContentWrapper>
+
+          <ShelfContainer>
+            <Shelf
+              title={`Selected Cards (${numSelectedCards})`}
+              fallbackText="No cards selected"
+            >
+              {selectedCards.map((card) => {
+                const updateCount = (newCount: number) =>
+                  updateCardCount(card.card.color, card.card.type, newCount);
+                return (
+                  <ShelfCard
+                    key={`${card.card.color}-${card.card.type}`}
+                    card={card.card}
+                    updateCount={updateCount}
+                    count={card.count}
+                  />
+                );
+              })}
+            </Shelf>
+          </ShelfContainer>
+        </DraftWrapper>
+        <Modal active={!!modalCard} closeModal={() => setModalCard(undefined)}>
+          <CardInfoComponent card={modalCard as CardItf} />
+        </Modal>
+      </Body>
+      <Footer></Footer>
+    </PageWrapper>
   );
 };
 

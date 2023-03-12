@@ -2,19 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Page } from "../constants/pages";
 import { COLOR_DARK, FONT_TITLE } from "../styles";
-
-const MenuWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Header = styled.div`
-  flex: 0;
-  background-color: ${COLOR_DARK};
-  padding: 32px 0;
-`;
+import { Header, Body, Footer, PageWrapper } from "../components/PageElements";
 
 const Title = styled.div`
   font-family: ${FONT_TITLE};
@@ -22,11 +10,6 @@ const Title = styled.div`
   text-align: center;
   color: white;
   font-weight: bold;
-`;
-
-const Body = styled.div`
-  flex: auto;
-  background-color: white;
 `;
 
 const MenuGroup = styled.div`
@@ -48,12 +31,6 @@ const MenuItem = styled.button`
   :hover {
     cursor: pointer;
   }
-`;
-
-const Footer = styled.div`
-  flex: 0;
-  background-color: ${COLOR_DARK};
-  padding: 32px 0;
 `;
 
 const LinkGroup = styled.div`
@@ -82,7 +59,7 @@ interface MenuProps {
 
 const Menu = ({ setPage }: MenuProps) => {
   return (
-    <MenuWrapper>
+    <PageWrapper>
       <Header>
         <Title>
           TWO ROOMS and a BOOM
@@ -109,7 +86,7 @@ const Menu = ({ setPage }: MenuProps) => {
         </LinkGroup>
         <Author>Created by Matthew French</Author>
       </Footer>
-    </MenuWrapper>
+    </PageWrapper>
   );
 };
 

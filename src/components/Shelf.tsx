@@ -21,7 +21,7 @@ const ShelfContainer = styled.div<{ expanded: boolean }>`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  box-shadow: -5px 0 15px 1px #ededed;
+  box-shadow: -5px 0 5px #ededed;
 
   ${ShelfTitle} {
     flex: ${(props) => (props.expanded ? 0 : "auto")};
