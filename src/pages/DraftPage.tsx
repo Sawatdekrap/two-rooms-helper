@@ -9,15 +9,13 @@ import { CardColor, CardType } from "../types/card";
 import Modal from "../components/Modal";
 import CardInfoComponent from "../components/CardInfo";
 import CardItf from "../interfaces/card";
-import { PageWrapper, Header, Body, Footer } from "../components/PageElements";
-import { FONT_TITLE } from "../styles";
-
-const Title = styled.h1`
-  font-size: 48px;
-  font-family: ${FONT_TITLE};
-  color: white;
-  text-align: center;
-`;
+import {
+  PageWrapper,
+  Header,
+  Body,
+  Footer,
+  Title,
+} from "../components/PageElements";
 
 const DraftWrapper = styled.div`
   display: flex;

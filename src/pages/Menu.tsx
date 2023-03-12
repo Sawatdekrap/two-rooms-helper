@@ -72,7 +72,9 @@ const Menu = ({ setPage }: MenuProps) => {
           <MenuItem>CARDS</MenuItem>
           <MenuItem onClick={() => setPage(Page.DRAFT)}>DRAFT</MenuItem>
           <MenuItem>PLAYSETS</MenuItem>
-          <MenuItem>INSTRUCTIONS</MenuItem>
+          <MenuItem onClick={() => setPage(Page.INSTRUCTIONS)}>
+            INSTRUCTIONS
+          </MenuItem>
         </MenuGroup>
       </Body>
       <Footer>

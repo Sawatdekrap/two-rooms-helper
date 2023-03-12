@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DraftPage from "./pages/DraftPage";
 import Menu from "./pages/Menu";
 import { Page } from "./constants/pages";
+import InstructionsPage from "./pages/Instructions";
 
 const AppContainer = styled.div``;
 
@@ -16,6 +17,9 @@ function App() {
       break;
     case Page.DRAFT:
       pageContent = <DraftPage />;
+      break;
+    case Page.INSTRUCTIONS:
+      pageContent = <InstructionsPage />;
       break;
     default:
       pageContent = <></>;
