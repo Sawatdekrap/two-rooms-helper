@@ -16,6 +16,7 @@ import {
   Footer,
   Title,
 } from "../components/PageElements";
+import DraftErrors from "../components/DraftErrors";
 
 const DraftWrapper = styled.div`
   display: flex;
@@ -104,6 +105,7 @@ const DraftPage = () => {
                 value={searchText}
                 onChange={(e) => setSearchtext(e.target.value)}
               />
+              <DraftErrors draftCards={draftCards} />
             </DraftHeader>
             <DraftCardsContainer>
               {filteredCards.map((card) => {
