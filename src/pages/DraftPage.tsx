@@ -105,7 +105,10 @@ const DraftPage = () => {
                 value={searchText}
                 onChange={(e) => setSearchtext(e.target.value)}
               />
-              <DraftErrors draftCards={draftCards} />
+              <DraftErrors
+                draftCards={draftCards}
+                setDraftCards={setDraftCards}
+              />
             </DraftHeader>
             <DraftCardsContainer>
               {filteredCards.map((card) => {

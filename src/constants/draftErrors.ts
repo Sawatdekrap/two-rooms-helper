@@ -1,5 +1,6 @@
 import DraftCardItf from "../interfaces/draftCard";
 import DraftErrorItf from "../interfaces/draftError";
+import { DraftErrorResolutionItf } from "../interfaces/draftError";
 import { CardId } from "../types/card";
 
 const arePlayedTogether = (cardIds: CardId[], draftCards: DraftCardItf[]) => {
@@ -9,46 +10,42 @@ const arePlayedTogether = (cardIds: CardId[], draftCards: DraftCardItf[]) => {
   return nMatchingCards === 0 || nMatchingCards === cardIds.length;
 };
 
+const newCountSetter = (cardIds: CardId[], newCount: number) => {
+  return (draftCards: DraftCardItf[]) => {
+    return draftCards.map((dc) =>
+      cardIds.includes(dc.card.id) ? { card: dc.card, count: newCount } : dc
+    );
+  }
+}
+
+const newAddRemoveResolutions = (cardIds: CardId[]): DraftErrorResolutionItf[] => {
+  return [
+    {
+      description: "+ Add all",
+      apply: newCountSetter(cardIds, 1),
+    },
+    {
+      description: "- Remove all",
+      apply: newCountSetter(cardIds, 0),
+    }
+  ]
+}
+
+const newPlayTogetherError = (description: string, cardIds: CardId[]): DraftErrorItf => {
+  return {
+    description,
+    isError: (draftCards) => !arePlayedTogether(cardIds, draftCards),
+    resolutions: newAddRemoveResolutions(cardIds),
+  }
+}
+
 const DRAFT_ERRORS: DraftErrorItf[] = [
-  {
-    description: "Ahab and Moby are not being played together",
-    isError: (draftCards) => {
-      return !arePlayedTogether([CardId.AHAB, CardId.MOBY], draftCards);
-    },
-  },
-  {
-    description: "Bomber and President are not being played together",
-    isError: (draftCards) => {
-      return !arePlayedTogether([CardId.BOMBER, CardId.PRESIDENT], draftCards);
-    },
-  },
-  {
-    description: "Butler and Maid are not being played together",
-    isError: (draftCards) => {
-      return !arePlayedTogether([CardId.BUTLER, CardId.MAID], draftCards);
-    },
-  },
-  {
-    description: "Decoy, Sniper, and Target are not being played together",
-    isError: (draftCards) => {
-      return !arePlayedTogether(
-        [CardId.DECOY, CardId.SNIPER, CardId.TARGET],
-        draftCards
-      );
-    },
-  },
-  {
-    description: "Juliet and Romeo are not being played together",
-    isError: (draftCards) => {
-      return !arePlayedTogether([CardId.JULIET, CardId.ROMEO], draftCards);
-    },
-  },
-  {
-    description: "Mistress and Wife are not being played together",
-    isError: (draftCards) => {
-      return !arePlayedTogether([CardId.MISTRESS, CardId.WIFE], draftCards);
-    },
-  },
+  newPlayTogetherError("Ahab and Moby are not being played together", [CardId.AHAB, CardId.MOBY]),
+  newPlayTogetherError("Bomber and President are not being played together", [CardId.BOMBER, CardId.PRESIDENT]),
+  newPlayTogetherError("Butler and Maid are not being played together", [CardId.BUTLER, CardId.MAID]),
+  newPlayTogetherError("Decoy, Sniper, and Target are not being played together", [CardId.DECOY, CardId.SNIPER, CardId.TARGET]),
+  newPlayTogetherError("Juliet and Romeo are not being played together", [CardId.JULIET, CardId.ROMEO]),
+  newPlayTogetherError("Mistress and Wife are not being played together", [CardId.MISTRESS, CardId.WIFE]),
 ];
 
 export default DRAFT_ERRORS;
